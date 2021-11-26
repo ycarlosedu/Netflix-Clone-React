@@ -1,7 +1,12 @@
 import React from 'react';
-import './App.css';
 import Home from './pages/Home';
+import GlobalStyle from './GlobalStyle';
 
 export default function App() {
-  return <Home />;
+  return (
+    <>
+      <GlobalStyle />
+      <Home />
+    </>
+  );
 }

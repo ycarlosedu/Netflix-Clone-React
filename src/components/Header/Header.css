@@ -27,6 +27,30 @@ header.black {
 
 .header--user {
   height: 35px;
+  animation-duration: 0.2s;
+  animation-iteration-count: 4;
+  transition: all 0.3s;
+}
+
+.header--user:hover {
+  opacity: 0.8;
+  animation-name: vibration;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes vibration {
+  0% {
+    transform: rotate(10deg);
+  }
+  33% {
+    transform: rotate(20deg);
+  }
+  66% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
 }
 
 .header--user img {
