@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Btn = styled.button`
-  display: inline-block;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
   font-weight: bold;
   padding: 12px 25px;
@@ -24,6 +27,10 @@ const Btn = styled.button`
   }
 `;
 
-export default function Button({ children, color }) {
-  return <Btn color={color}>{children}</Btn>;
+export default function Button({ children, color, onClick }) {
+  return (
+    <Btn color={color} onClick={onClick}>
+      {children}
+    </Btn>
+  );
 }

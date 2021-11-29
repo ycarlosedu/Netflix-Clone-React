@@ -71,6 +71,8 @@ export const FeaturedDescription = styled.p`
 
 export const FeaturedButtons = styled.div`
   margin-top: 15px;
+  display: flex;
+  align-items: center;
 `;
 
 export const FeaturedGenres = styled.p`

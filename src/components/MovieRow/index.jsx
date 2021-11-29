@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import './MovieRow.css';
+// import './MovieRow.css';
+import {
+  MovieRowDiv,
+  ListArea,
+  List,
+  Item,
+  ArrowRight,
+  ArrowLeft,
+} from './MovieRow.js';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
@@ -25,33 +33,32 @@ export default function MovieRow({ title, items }) {
     setScrollX(x);
   };
   return (
-    <div className='movieRow'>
+    <MovieRowDiv>
       <h2>{title}</h2>
 
-      <div className='movieRow--left' onClick={handleLeftArrow}>
+      <ArrowLeft onClick={handleLeftArrow}>
         <NavigateBeforeIcon fontSize='large' />
-      </div>
+      </ArrowLeft>
 
-      <div className='movieRow--right' onClick={handleRightArrow}>
+      <ArrowRight onClick={handleRightArrow}>
         <NavigateNextIcon fontSize='large' />
-      </div>
+      </ArrowRight>
 
-      <div className='movieRow--listarea'>
-        <div
-          className='movieRow--list'
+      <ListArea>
+        <List
           style={{ marginLeft: scrollX, width: items.results.length * 150 }}
         >
           {items.results.length > 0 &&
             items.results.map((item, key) => (
-              <div key={key} className='movieRow--item'>
+              <Item key={key}>
                 <img
                   src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                   alt={item.original_title}
                 />
-              </div>
+              </Item>
             ))}
-        </div>
-      </div>
-    </div>
+        </List>
+      </ListArea>
+    </MovieRowDiv>
   );
 }

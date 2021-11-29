@@ -1,0 +1,6 @@
+import styled from 'styled-components';
+
+export const FooterStyle = styled.footer`
+  margin: 50px 0;
+  text-align: center;
+`;

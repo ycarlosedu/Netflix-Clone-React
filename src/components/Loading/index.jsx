@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import './Loading.css';
+import { LoadingDiv } from './Loading.js';
 
 export default function Loading({ setLoaded }) {
   useEffect(() => {
-    let loading = document.querySelector('.loading');
+    let loading = document.querySelector('#loading');
     loading.addEventListener('animationend', () => {
       setLoaded(true);
     });
@@ -15,11 +15,11 @@ export default function Loading({ setLoaded }) {
   }, [setLoaded]);
 
   return (
-    <div className='loading'>
+    <LoadingDiv id='loading'>
       <img
         src='https://c.tenor.com/Rfyx9OkRI38AAAAC/netflix-netflix-startup.gif'
         alt='carregando...'
       />
-    </div>
+    </LoadingDiv>
   );
 }

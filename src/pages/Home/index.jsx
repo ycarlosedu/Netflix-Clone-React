@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { getHomeList, getSingleMovie } from '../../services/TMDB.js';
 import MovieRow from '../../components/MovieRow';
 import FeaturedMovie from '../../components/FeaturedMovie';
-import Header from '../../components/Header';
+import HeaderHome from '../../components/Header';
 import Footer from '../../components/Footer';
 import Loading from '../../components/Loading';
 
@@ -13,13 +13,7 @@ export default function Home() {
   const [featuredData, setFeaturedData] = useState(null);
   const [headerBackground, setHeaderBackground] = useState(false);
   const [loaded, setLoaded] = useState(false);
-
-  const LoadingAll = async () => {
-    let list = await getHomeList();
-    let trending = list.filter((items) => items.slug === 'trending');
-    setMovielist(list);
-    LoadFeatured(trending);
-  };
+  const [myList, setMyList] = useState(null);
 
   const LoadFeatured = async (trending) => {
     let randomChosen = Math.floor(
@@ -32,7 +26,6 @@ export default function Home() {
     } else {
       LoadFeatured(trending);
     }
-    return;
   };
 
   const scrollListener = () => {
@@ -44,7 +37,15 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const LoadingAll = async () => {
+      let list = await getHomeList();
+      let trending = list.filter((items) => items.slug === 'trending');
+      setMovielist(list);
+      LoadFeatured(trending);
+    };
     LoadingAll();
+    setMyList(JSON.parse(localStorage.getItem('MyList')) || null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -53,16 +54,19 @@ export default function Home() {
       window.removeEventListener('scroll', scrollListener);
     };
   }, []);
-
+  console.log(myList);
   return (
     <div>
       {movielist === null || featuredData === null || loaded === false ? (
         <Loading setLoaded={setLoaded} />
       ) : (
         <>
-          <Header Background={headerBackground} />
+          <HeaderHome Background={headerBackground} />
           <FeaturedMovie item={featuredData} />
           <Lists>
+            {myList === { results: [] } ? null : (
+              <MovieRow title='Minha Lista' items={myList} />
+            )}
             {movielist.map((item, key) => (
               <MovieRow key={key} title={item.title} items={item.items} />
             ))}
