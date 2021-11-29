@@ -13,7 +13,7 @@ export default function Home() {
   const [featuredData, setFeaturedData] = useState(null);
   const [headerBackground, setHeaderBackground] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [myList, setMyList] = useState(null);
+  const [myList, setMyList] = useState({ results: [] });
 
   const LoadFeatured = async (trending) => {
     let randomChosen = Math.floor(
@@ -44,7 +44,7 @@ export default function Home() {
       LoadFeatured(trending);
     };
     LoadingAll();
-    setMyList(JSON.parse(localStorage.getItem('MyList')) || null);
+    setMyList(JSON.parse(localStorage.getItem('MyList')) || { results: [] });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,7 +54,6 @@ export default function Home() {
       window.removeEventListener('scroll', scrollListener);
     };
   }, []);
-  console.log(myList);
   return (
     <div>
       {movielist === null || featuredData === null || loaded === false ? (
@@ -64,7 +63,7 @@ export default function Home() {
           <HeaderHome Background={headerBackground} />
           <FeaturedMovie item={featuredData} />
           <Lists>
-            {myList === { results: [] } ? null : (
+            {myList.results.length === 0 ? null : (
               <MovieRow title='Minha Lista' items={myList} />
             )}
             {movielist.map((item, key) => (
