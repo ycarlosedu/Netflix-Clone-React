@@ -7,13 +7,15 @@ import FeaturedMovie from '../../components/FeaturedMovie';
 import HeaderHome from '../../components/Header';
 import Footer from '../../components/Footer';
 import Loading from '../../components/Loading';
+import { useMyListContext } from '../../contexts/MyList';
 
 export default function Home() {
   const [movielist, setMovielist] = useState(null);
   const [featuredData, setFeaturedData] = useState(null);
   const [headerBackground, setHeaderBackground] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [myList, setMyList] = useState({ results: [] });
+
+  const { myList, GetLocalStorage } = useMyListContext();
 
   const LoadFeatured = async (trending) => {
     let randomChosen = Math.floor(
@@ -44,7 +46,7 @@ export default function Home() {
       LoadFeatured(trending);
     };
     LoadingAll();
-    setMyList(JSON.parse(localStorage.getItem('MyList')) || { results: [] });
+    GetLocalStorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,6 +56,7 @@ export default function Home() {
       window.removeEventListener('scroll', scrollListener);
     };
   }, []);
+
   return (
     <div>
       {movielist === null || featuredData === null || loaded === false ? (

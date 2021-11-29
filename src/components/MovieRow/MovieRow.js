@@ -45,7 +45,9 @@ export const List = styled.div`
   transition: all 0.3s ease;
 `;
 
-export const Item = styled.div`
+export const Item = styled.button`
+  background: transparent;
+  border: none;
   display: inline-block;
   width: 150px;
 
