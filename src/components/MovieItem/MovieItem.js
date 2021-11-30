@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const Item = styled.button`
-  background: transparent;
+export const Item = styled.div`
+  /* background: transparent; */
   border: none;
   display: inline-block;
   width: 150px;
@@ -14,6 +14,16 @@ export const Item = styled.button`
 
   & > div {
     display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px 10px 10px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.95);
+    width: 600px;
+    height: 400px;
+    z-index: 9999;
+    border-radius: 20px;
+
     transition: all 0.3s ease;
     animation: fade;
     animation-duration: 0.3s;
@@ -27,16 +37,6 @@ export const Item = styled.button`
 
   &:hover > div {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 25px 10px 10px;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.95);
-    width: 450px;
-    height: 300px;
-    z-index: 9999;
-    border-radius: 20px;
-    color: white;
   }
 
   @keyframes fade {
@@ -49,4 +49,38 @@ export const Item = styled.button`
       transform: translateY(-250px);
     }
   }
+`;
+
+export const ItemInfos = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left: 10px;
+`;
+
+export const OriginalTitle = styled.h2`
+  font-weight: bold;
+`;
+
+export const Buttons = styled.h2`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const YearAndPoints = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+`;
+
+export const Points = styled.p`
+  color: #46d369;
+`;
+
+export const Description = styled.p`
+  text-align: center;
 `;

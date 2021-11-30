@@ -39,6 +39,8 @@ export default function FeaturedMovie({ item }) {
     item.overview = item.overview.substring(0, 200) + '...';
   }
 
+  function HandleWatch() {}
+
   function HandleAddToMyList() {
     AddToMyList(item);
   }
@@ -61,7 +63,7 @@ export default function FeaturedMovie({ item }) {
             <FeaturedTime>{item.runtime} minutos</FeaturedTime>
             <FeaturedDescription>{item.overview}</FeaturedDescription>
             <FeaturedButtons>
-              <Button>▶ Assitir</Button>
+              <Button onClick={HandleWatch}>▶ Assitir</Button>
               <Button color='secondary' onClick={HandleAddToMyList}>
                 {isOnList ? '✔ Na lista' : '+ Minha Lista'}
               </Button>

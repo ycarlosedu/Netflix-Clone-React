@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-// import './MovieRow.css';
 import {
   MovieRowDiv,
   ListArea,
   List,
-  Item,
   ArrowRight,
   ArrowLeft,
 } from './MovieRow.js';
+import MovieItem from '../MovieItem';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
@@ -50,27 +49,7 @@ export default function MovieRow({ title, items }) {
         >
           {items.results.length > 0 &&
             items.results.map((item, key) => (
-              <Item key={key}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
-                  alt={item.original_title}
-                />
-                <div>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
-                    alt={item.original_title}
-                  />
-                  <div>
-                    <h2>{item.original_title || item.name}</h2>
-                    <h3>
-                      {item.title !== item.original_title ? item.title : null}
-                    </h3>
-                    <p>{item.overview}</p>
-                    <p>{item.release_date || item.first_air_date}</p>
-                    <p>{item.vote_average} points</p>
-                  </div>
-                </div>
-              </Item>
+              <MovieItem key={key} item={item} />
             ))}
         </List>
       </ListArea>

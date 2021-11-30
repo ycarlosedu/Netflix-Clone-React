@@ -1,26 +1,58 @@
 import React from 'react';
-import { Item } from './Movieitem.js';
+import {
+  Item,
+  OriginalTitle,
+  ItemInfos,
+  Buttons,
+  YearAndPoints,
+  Description,
+  Points,
+} from './MovieItem.js';
+import Button from '../Buttons';
+import { useMyListContext } from '../../contexts/MyList';
 
 export default function MovieItem({ item }) {
-  return (
-    <Item>
-      <img
-        src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
-        alt={item.original_title}
-      />
-      <div>
+  const { isOnList, AddToMyList } = useMyListContext();
+  const firstDate = new Date(item.release_date || item.first_air_date);
+  if (item.overview.length > 200) {
+    item.overview = item.overview.substring(0, 200) + '...';
+  }
+
+  function HandleAddToMyList() {
+    AddToMyList(item);
+  }
+
+  if (item.overview) {
+    return (
+      <Item>
         <img
           src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
           alt={item.original_title}
         />
         <div>
-          <h2>{item.original_title || item.name}</h2>
-          <h3>{item.title !== item.original_title ? item.title : null}</h3>
-          <p>{item.overview}</p>
-          <p>{item.release_date || item.first_air_date}</p>
-          <p>{item.vote_average} points</p>
+          <img
+            src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+            alt={item.original_title}
+          />
+          <ItemInfos>
+            <OriginalTitle>{item.original_title || item.name}</OriginalTitle>
+            {item.title !== item.original_title ? <h3>{item.title}</h3> : null}
+            <YearAndPoints>
+              <span>{firstDate.getFullYear()}</span>
+              <Points>{item.vote_average} points</Points>
+            </YearAndPoints>
+            <Description>{item.overview}</Description>
+            <Buttons>
+              <Button>▶ Assitir</Button>
+              <Button color='secondary' onClick={HandleAddToMyList}>
+                {isOnList ? '✔ Na lista' : '+ Minha Lista'}
+              </Button>
+            </Buttons>
+          </ItemInfos>
         </div>
-      </div>
-    </Item>
-  );
+      </Item>
+    );
+  } else {
+    return null;
+  }
 }
