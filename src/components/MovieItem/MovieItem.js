@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Item = styled.div`
-  /* background: transparent; */
   border: none;
   display: inline-block;
   width: 150px;
@@ -28,6 +27,11 @@ export const Item = styled.div`
     animation: fade;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
+
+    @media (max-width: 768px) {
+      width: 400px;
+      height: 400px;
+    }
 
     & > img {
       width: 40%;
@@ -58,10 +62,16 @@ export const ItemInfos = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding-left: 10px;
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 export const OriginalTitle = styled.h2`
   font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const Buttons = styled.h2`
@@ -69,6 +79,15 @@ export const Buttons = styled.h2`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  @media (max-width: 768px) {
+    flex-direction: row;
+  }
+
+  & > button {
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const YearAndPoints = styled.div`

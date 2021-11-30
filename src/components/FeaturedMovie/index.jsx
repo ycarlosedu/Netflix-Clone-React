@@ -14,10 +14,12 @@ import {
 } from './FeaturedMovie.js';
 import Button from '../Buttons';
 import { useMyListContext } from '../../contexts/MyList';
+import { useNavigate } from 'react-router-dom';
 
 export default function FeaturedMovie({ item }) {
   const { myList, isOnList, GetLocalStorage, VerifyIfIsOnList, AddToMyList } =
     useMyListContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     GetLocalStorage();
@@ -39,7 +41,9 @@ export default function FeaturedMovie({ item }) {
     item.overview = item.overview.substring(0, 200) + '...';
   }
 
-  function HandleWatch() {}
+  function HandleWatch() {
+    navigate('/watch/');
+  }
 
   function HandleAddToMyList() {
     AddToMyList(item);

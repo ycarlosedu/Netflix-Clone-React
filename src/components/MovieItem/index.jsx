@@ -10,12 +10,18 @@ import {
 } from './MovieItem.js';
 import Button from '../Buttons';
 import { useMyListContext } from '../../contexts/MyList';
+import { useNavigate } from 'react-router-dom';
 
 export default function MovieItem({ item }) {
   const { isOnList, AddToMyList } = useMyListContext();
+  const navigate = useNavigate();
   const firstDate = new Date(item.release_date || item.first_air_date);
   if (item.overview.length > 200) {
     item.overview = item.overview.substring(0, 200) + '...';
+  }
+
+  function HandleWatch() {
+    navigate('/watch/');
   }
 
   function HandleAddToMyList() {
@@ -43,7 +49,7 @@ export default function MovieItem({ item }) {
             </YearAndPoints>
             <Description>{item.overview}</Description>
             <Buttons>
-              <Button>▶ Assitir</Button>
+              <Button onClick={HandleWatch}>▶ Assitir</Button>
               <Button color='secondary' onClick={HandleAddToMyList}>
                 {isOnList ? '✔ Na lista' : '+ Minha Lista'}
               </Button>

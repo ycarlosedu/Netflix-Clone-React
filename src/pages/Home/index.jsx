@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Lists } from './Home.js';
 import { useState } from 'react';
 import { getHomeList, getSingleMovie } from '../../services/TMDB.js';
 import MovieRow from '../../components/MovieRow';
+import { Lists } from '../../components/MovieRow/MovieRow.js';
 import FeaturedMovie from '../../components/FeaturedMovie';
 import HeaderHome from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -12,7 +12,6 @@ import { useMyListContext } from '../../contexts/MyList';
 export default function Home() {
   const [movielist, setMovielist] = useState(null);
   const [featuredData, setFeaturedData] = useState(null);
-  const [headerBackground, setHeaderBackground] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const { myList, GetLocalStorage } = useMyListContext();
@@ -30,16 +29,6 @@ export default function Home() {
     }
   };
 
-  const AddToFeatured = () => {};
-
-  const scrollListener = () => {
-    if (window.scrollY > 10) {
-      setHeaderBackground(true);
-    } else {
-      setHeaderBackground(false);
-    }
-  };
-
   useEffect(() => {
     const LoadingAll = async () => {
       let list = await getHomeList();
@@ -52,36 +41,20 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    window.addEventListener('scroll', scrollListener);
-    return () => {
-      window.removeEventListener('scroll', scrollListener);
-    };
-  }, []);
-
   return (
     <div>
       {movielist === null || featuredData === null || loaded === false ? (
         <Loading setLoaded={setLoaded} />
       ) : (
         <>
-          <HeaderHome Background={headerBackground} />
+          <HeaderHome />
           <FeaturedMovie item={featuredData} />
           <Lists>
             {myList.results.length === 0 ? null : (
-              <MovieRow
-                clickOnMovie={AddToFeatured}
-                title='Minha Lista'
-                items={myList}
-              />
+              <MovieRow title='Minha Lista' items={myList} />
             )}
             {movielist.map((item, key) => (
-              <MovieRow
-                clickOnMovie={AddToFeatured}
-                key={key}
-                title={item.title}
-                items={item.items}
-              />
+              <MovieRow key={key} title={item.title} items={item.items} />
             ))}
           </Lists>
           <Footer />

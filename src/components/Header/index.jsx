@@ -1,8 +1,25 @@
 import { Header, HeaderLogo, HeaderUser } from './Header.js';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function HeaderHome({ Background }) {
+export default function HeaderHome() {
+  const [Background, setBackground] = useState(false);
+
+  const scrollListener = () => {
+    if (window.scrollY > 10) {
+      setBackground(true);
+    } else {
+      setBackground(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollListener);
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    };
+  }, []);
+
   return (
     <Header Background={Background}>
       <HeaderLogo>

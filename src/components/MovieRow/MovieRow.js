@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Lists = styled.section`
+  margin-top: -150px;
+`;
+
 export const ArrowRight = styled.div`
   position: absolute;
   width: 40px;
