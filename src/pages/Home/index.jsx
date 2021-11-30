@@ -30,6 +30,8 @@ export default function Home() {
     }
   };
 
+  const AddToFeatured = () => {};
+
   const scrollListener = () => {
     if (window.scrollY > 10) {
       setHeaderBackground(true);
@@ -67,10 +69,19 @@ export default function Home() {
           <FeaturedMovie item={featuredData} />
           <Lists>
             {myList.results.length === 0 ? null : (
-              <MovieRow title='Minha Lista' items={myList} />
+              <MovieRow
+                clickOnMovie={AddToFeatured}
+                title='Minha Lista'
+                items={myList}
+              />
             )}
             {movielist.map((item, key) => (
-              <MovieRow key={key} title={item.title} items={item.items} />
+              <MovieRow
+                clickOnMovie={AddToFeatured}
+                key={key}
+                title={item.title}
+                items={item.items}
+              />
             ))}
           </Lists>
           <Footer />

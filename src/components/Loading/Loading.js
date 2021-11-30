@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const LoadingDiv = styled.div`
+  background-color: #131313;
   position: fixed;
   z-index: 99;
   left: 0;
@@ -14,6 +15,12 @@ export const LoadingDiv = styled.div`
   transition: all 5s ease;
   animation-name: fade;
   animation-duration: 1.8s;
+
+  /* iframe {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  } */
 
   @keyframes fade {
     from {
